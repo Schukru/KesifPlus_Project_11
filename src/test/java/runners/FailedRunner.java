@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
                 "junit:target/reports/xml/failed_xml-report/cucumber.xml"
         },
         features = "@target/reports/rerun.txt",
-        glue = "stepDefinitions"
+        glue = ""
 )
 
 public class FailedRunner {

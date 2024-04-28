@@ -6,8 +6,6 @@ import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.html5.LocalStorage;
-import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
 import pages.CommonPage;
 import utility.ConfigurationReader;
