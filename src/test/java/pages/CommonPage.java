@@ -11,6 +11,7 @@ public abstract class CommonPage {
     }
 
     private LoginPage loginPage;
+    private HomePage homePage;
 
     public LoginPage getLoginPage() {
         if (loginPage == null){
@@ -19,5 +20,10 @@ public abstract class CommonPage {
         return loginPage;
     }
 
-
+    public HomePage getHomePage() {
+        if (homePage == null){
+            homePage = new HomePage();
+        }
+        return homePage;
+    }
 }

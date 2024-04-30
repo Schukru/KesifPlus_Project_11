@@ -6,11 +6,14 @@ import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.html5.LocalStorage;
+import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
 import pages.CommonPage;
 import utility.ConfigurationReader;
 import utility.DB.DatabaseUtilities;
 import utility.Driver;
+import utility.UI.Utilities;
 
 public class Hooks {
 
@@ -51,6 +54,9 @@ public class Hooks {
         commonPage = new CommonPage() {
         };
         actions = new Actions(driver);
+
+        driver.get(ConfigurationReader.getProperty("urlTest"));
+        Utilities.waitForPageToLoad(15);
     }
 
     @After(value = "@UI")
