@@ -14,7 +14,7 @@ public class HomePage extends CommonPage {
         WebElement btn = getMainButton("Daha Fazla");
         hoverAndWaitButton(btn, 2);
         btn.click();
-        Utilities.waitForClickablility(getDropDownButton("Hakkımızda"), 5);
+        Utilities.waitForClickability(getDropDownButton("Hakkımızda"), 5);
     }
 
     public WebElement getMainButton(String option) {
