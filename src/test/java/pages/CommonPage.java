@@ -13,6 +13,8 @@ public abstract class CommonPage {
     private LoginPage loginPage;
     private HomePage homePage;
 
+    private ProfilePage profilePage;
+
     public LoginPage getLoginPage() {
         if (loginPage == null){
             loginPage = new LoginPage();
@@ -26,4 +28,16 @@ public abstract class CommonPage {
         }
         return homePage;
     }
+
+    public ProfilePage getProfilePage() {
+        if (profilePage == null){
+            profilePage = new ProfilePage();
+        }
+        return profilePage;
+    }
+
+
+
+
+
 }
