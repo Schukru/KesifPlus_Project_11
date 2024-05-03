@@ -57,4 +57,3 @@ Feature: Different login scenarios for FrameWork
   @UI
   Scenario: login version 7
     Given Enum kullanarak
-

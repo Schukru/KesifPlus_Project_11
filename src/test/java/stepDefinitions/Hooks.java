@@ -13,6 +13,7 @@ import pages.CommonPage;
 import utility.ConfigurationReader;
 import utility.DB.DatabaseUtilities;
 import utility.Driver;
+import utility.UI.Utilities;
 
 public class Hooks {
 
@@ -53,6 +54,9 @@ public class Hooks {
         commonPage = new CommonPage() {
         };
         actions = new Actions(driver);
+
+        driver.get(ConfigurationReader.getProperty("urlTest"));
+        Utilities.waitForPageToLoad(15);
     }
 
     @After(value = "@UI")
