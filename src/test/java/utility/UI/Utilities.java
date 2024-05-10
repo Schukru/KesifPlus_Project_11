@@ -1,5 +1,6 @@
 package utility.UI;
 
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -52,5 +53,26 @@ public class Utilities {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
+    public static void sendText(WebElement element, String text) {
+        try {
+            waitForClickability(element, 15).sendKeys(text);
+        } catch (ElementNotInteractableException e) {
+            scrollToElement(element);
+            sendText(element, text);
+        }
+    }
+
+    public static void scrollToElement(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        waitForVisibility(element);
+    }
+
+    public static void waitForVisibility(WebElement webElement){
+        WebDriverWait webDriverWait=new WebDriverWait(driver,Duration.ofSeconds(10));
+        webDriverWait.until(ExpectedConditions.visibilityOf(webElement));
+    }
+
+
+
 
 }

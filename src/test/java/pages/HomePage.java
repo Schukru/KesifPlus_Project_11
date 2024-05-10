@@ -3,10 +3,14 @@ package pages;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import utility.ConfigurationReader;
 import utility.Driver;
 import utility.UI.Utilities;
 
 import java.util.List;
+
+import static stepDefinitions.Hooks.driver;
 
 public class HomePage extends CommonPage {
 
@@ -104,6 +108,39 @@ public class HomePage extends CommonPage {
 
     public void verifyOptionForOutline(String option){
         Assert.assertTrue(isOptionClickable(option));
+    }
+
+
+// Sukru US_023
+    @FindBy (xpath = "//button[@type='button']")
+    private WebElement googleLoginButton;
+    @FindBy (xpath = "//input[@type='email']")
+    private WebElement inputGmail;
+    @FindBy(xpath = "//input[@type='password']")
+    private WebElement inputPassword;
+    @FindBy (xpath = "//span[contains(text(), 'Next')]")
+    private WebElement nextButton;
+    @FindBy (xpath = "//button//span[contains(text(), 'Proje Olustur')]")
+    private WebElement projeOlusturButton;
+    @FindBy (xpath = "//*[contains(text(), 'mobilyaplan.test.user@gmail.com')]")
+    private WebElement myEmailText;
+
+    public void clickGoogleLoginButton(){
+        googleLoginButton.click();
+    }
+
+    public void inputGmailAccount(){
+        Utilities.sendText(inputGmail, ConfigurationReader.getProperty("google_user_email"));
+        nextButton.click();
+
+        Utilities.sendText(inputPassword, ConfigurationReader.getProperty("google_user_password"));
+        nextButton.click();
+    }
+
+    public void verifyProjectPage(){
+        Utilities.waitForClickability(projeOlusturButton, 10);
+        Assert.assertEquals("https://stg.mobilyaplan.app/projects", driver.getCurrentUrl());
+        Assert.assertTrue(myEmailText.isEnabled());
     }
 
 }

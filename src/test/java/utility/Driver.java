@@ -150,10 +150,10 @@ public class Driver {
     This method makes sure we have some form of driver session or driver id has.
     Either null or not null it must exist.
      */
-//    public static void closeDriver() {
-//        if (driverPool.get() != null) {
-//            driverPool.get().quit();
-//            driverPool.remove();
-//        }
-//    }
+    public static void closeDriver() {
+        if (driverPool.get() != null) {
+            driverPool.get().quit();
+            driverPool.remove();
+        }
+    }
 }
