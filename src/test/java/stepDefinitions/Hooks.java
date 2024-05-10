@@ -55,7 +55,7 @@ public class Hooks {
         };
         actions = new Actions(driver);
 
-        driver.get(ConfigurationReader.getProperty("urlTest"));
+        driver.get(ConfigurationReader.getProperty("urlMain"));
         Utilities.waitForPageToLoad(15);
     }
 
