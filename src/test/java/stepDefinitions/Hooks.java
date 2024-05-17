@@ -59,6 +59,16 @@ public class Hooks {
         Utilities.waitForPageToLoad(15);
     }
 
+    @Before(order = 2, value = "@UI and @Test")
+    public void setupTest() {
+        driver = Driver.getDriver();
+        commonPage = new CommonPage() {};
+        actions = new Actions(driver);
+
+        driver.get(ConfigurationReader.getProperty("urlTest"));
+        Utilities.waitForPageToLoad(15);
+    }
+
     @After(value = "@UI")
     public void tearDown(Scenario scenario) {
 
