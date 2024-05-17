@@ -11,7 +11,6 @@ Scenario: Bir kullanıcı olarak Profil bölümüne erişebilmeliyim
       And user clicks on Kaydolun button
       And user clicks on Profile button
       Then user should be navigated to Profile page
-      And user clicks on Profile image
       And user uploads profile image
       And user should see profile image is loaded
       And user changes profile image
