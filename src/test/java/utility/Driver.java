@@ -49,6 +49,7 @@ public class Driver {
         // isHeadless = false;
 
         // Extent Report'un Türkçe desteği olmadığından Spark Report'u oluşturabilmesi için eklendi
+//        Locale.setDefault(new Locale("EN"));
         Locale.setDefault(new Locale.Builder().setLanguage("en").build());
         System.setProperty("user.language", "en");
 

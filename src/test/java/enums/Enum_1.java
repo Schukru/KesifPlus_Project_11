@@ -2,7 +2,7 @@ package enums;
 
 public enum Enum_1 {
 
-    USER1("user1@gmail.com", "user1Passsword"),
+    USER1("mobilyaplan.test.user@gmail.com", "Mobilyaplan.test.user1/2"),
     USER2("user2@gmail.com", "user2Passsword"),
     USER3("user3@gmail.com", "user3Passsword"),
     USER4("user4@gmail.com", "user4Passsword"),
@@ -20,4 +20,11 @@ public enum Enum_1 {
         System.out.println("user logged in with credentials");
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }

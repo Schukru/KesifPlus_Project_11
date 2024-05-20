@@ -1,5 +1,4 @@
 @UI
-  @Test
   @Tuesday_2
 Feature: US 023 Verify that the project page should be accessible through google account
 
