@@ -2,7 +2,6 @@ package pages;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utility.ConfigurationReader;
@@ -10,7 +9,6 @@ import utility.Driver;
 import utility.UI.Utilities;
 
 import java.util.List;
-import java.util.Set;
 
 import static stepDefinitions.Hooks.driver;
 
@@ -57,24 +55,24 @@ public class HomePage extends CommonPage {
         return element;
     }
 
-    public void clickDropDownOption(String title) {
+    public void clickDropDownOption(String title){
         WebElement element = getDropDownButton(title);
         element.click();
     }
 
-    public void verifyPageOptions(List<List<String>> options) {
+    public void verifyPageOptions(List<List<String>> options){
         options.stream()
                 .map(optionList -> optionList.get(0))
                 .forEach(option -> Assert.assertTrue(isOptionVisible(option)));
     }
 
-    public boolean isOptionVisible(String option) {
+    public boolean isOptionVisible(String option){
         WebElement btn = getDestekPageOption(option);
         System.out.println("Destek options = " + option);
         return btn.isDisplayed();
     }
 
-    public WebElement getDestekPageOption(String title) {
+    public WebElement  getDestekPageOption(String title){
         WebElement element = Driver.getDriver().findElement(By.xpath(
                 "(//div[@data-testid='columns']//span[contains(text(), '" + title + "')])[1]"
         ));
@@ -95,98 +93,70 @@ public class HomePage extends CommonPage {
 //                .forEach(option -> Assert.assertTrue(isFooterOptionFunctional(option)));
     }
 
-    public boolean isFooterOptionFunctional(String title) {
+    public boolean isFooterOptionFunctional(String title){
         WebElement btn = getFooterOption(title);
         System.out.println("Footer title = " + title);
         return (btn.isEnabled() &&
                 btn.isDisplayed());
     }
 
-    public WebElement getFooterOption(String title) {
+    public WebElement getFooterOption(String title){
         WebElement element = Driver.getDriver().findElement(By.xpath(
                 "//div[@id='SITE_FOOTER']//*[contains(text(), '" + title + "')]"));
         return element;
     }
 
-    public void verifyOptionForOutline(String option) {
+    public void verifyOptionForOutline(String option){
         Assert.assertTrue(isOptionClickable(option));
     }
 
 
     // Sukru US_023
-    @FindBy(xpath = "//button[@type='button']")
+    @FindBy (xpath = "//button[@type='button']")
     private WebElement googleLoginButton;
-    @FindBy(xpath = "//input[@type='email']")
+    @FindBy (xpath = "//input[@type='email']")
     private WebElement inputGmail;
     @FindBy(xpath = "//input[@type='password']")
     private WebElement inputPassword;
-    @FindBy(xpath = "//span[contains(text(), 'Next')]")
+    @FindBy (xpath = "//span[contains(text(), 'Next')]")
     private WebElement nextButton;
-    @FindBy(xpath = "//button//span[contains(text(), 'Proje Olustur')]")
+    @FindBy (xpath = "//button//span[contains(text(), 'Proje Olustur')]")
     private WebElement projeOlusturButton;
-    @FindBy(xpath = "//*[contains(text(), 'mobilyaplan.test.user@gmail.com')]")
+    @FindBy (xpath = "//*[contains(text(), 'mobilyaplan.test.user@gmail.com')]")
     private WebElement myEmailText;
 
-    public void clickGoogleLoginButton() {
+    public void clickGoogleLoginButton(){
         googleLoginButton.click();
     }
 
-    public void inputGmailAccount(String eMail, String password) {
-        Utilities.waitAndSendText(inputGmail, eMail, 10);
+    public void inputGmailAccount(){
+        Utilities.sendText(inputGmail, ConfigurationReader.getProperty("google_user_email"));
         nextButton.click();
 
-        Utilities.waitAndSendText(inputPassword, password, 10);
-//        Utilities.waitForClickability(inputPassword, 10);
-//        Utilities.sendText(inputPassword, password);
+        Utilities.sendText(inputPassword, ConfigurationReader.getProperty("google_user_password"));
         nextButton.click();
     }
 
-    public void verifyProjectPage() {
+    public void verifyProjectPage(){
         Utilities.waitForClickability(projeOlusturButton, 10);
         Assert.assertEquals("https://stg.mobilyaplan.app/projects", driver.getCurrentUrl());
         Assert.assertTrue(myEmailText.isEnabled());
     }
 
-    // Sukru US_036
 
-    @FindBy(xpath = "//div[@data-testid='socialAuth']//button")
-    private WebElement googleIleGirisButton;
-    @FindBy(xpath = "//span[.='Çizmeye Başla']")
-    private WebElement cizmeyeBaslaButton;
+    //  US 036 sukru
 
-    public void clickAndLoginWithGoggle(String eMail, String password) {
-        googleIleGirisButton.click();
-        setGoogleWindowAndLogin(eMail, password);
+    @FindBy(css = "input[name='email']")
+    private WebElement inputEmail;
+    @FindBy(css = "input[name='password']")
+    private WebElement inputEmailPassword;
+    @FindBy(xpath = "//span[.='Login']")
+    private WebElement loginButton;
+
+    public void loginWithEmail(String eMail, String password){
+        Utilities.sendText(inputEmail, eMail);
+        Utilities.sendText(inputPassword, password);
+        loginButton.click();
     }
 
-    public void setGoogleWindowAndLogin(String eMail, String password) {
-        String mainHandle = driver.getWindowHandle();
-        Set<String> windowHandles = driver.getWindowHandles();
-
-        do {
-            int openWindowsCount = windowHandles.size();
-            if (openWindowsCount > 1) {
-                break;
-            }
-        } while (true);
-
-        for (String handle : windowHandles) {
-            if (!handle.equals(driver.getWindowHandle())) {
-                driver.switchTo().window(handle);
-
-                inputGmailAccount(eMail, password);
-
-                driver.switchTo().window(mainHandle);
-                Utilities.waitFor(1);
-                Utilities.waitForPageToLoad(15);
-            }
-        }
-    }
-
-    public void goToProjectsPage() {
-        Utilities.waitAndClick(cizmeyeBaslaButton, 10);
-        Utilities.waitAndClick(googleLoginButton, 10);
-    }
 }
-
-

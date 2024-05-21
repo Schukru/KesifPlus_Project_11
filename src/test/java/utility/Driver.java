@@ -53,7 +53,6 @@ public class Driver {
         Locale.setDefault(new Locale.Builder().setLanguage("en").build());
         System.setProperty("user.language", "en");
 
-
         //setting various capabilities for browsers
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.setExperimentalOption("prefs", chromePrefs);
