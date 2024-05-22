@@ -111,7 +111,7 @@ public class HomePage extends CommonPage {
     }
 
 
-// Sukru US_023
+    // Sukru US_023
     @FindBy (xpath = "//button[@type='button']")
     private WebElement googleLoginButton;
     @FindBy (xpath = "//input[@type='email']")
@@ -143,6 +143,20 @@ public class HomePage extends CommonPage {
         Assert.assertTrue(myEmailText.isEnabled());
     }
 
+
+    //  US 036 sukru
+
+    @FindBy(css = "input[name='email']")
+    private WebElement inputEmail;
+    @FindBy(css = "input[name='password']")
+    private WebElement inputEmailPassword;
+    @FindBy(xpath = "//span[.='Login']")
+    private WebElement loginButton;
+
+    public void loginWithEmail(String eMail, String password){
+        Utilities.sendText(inputEmail, eMail);
+        Utilities.sendText(inputPassword, password);
+        loginButton.click();
+    }
+
 }
-
-

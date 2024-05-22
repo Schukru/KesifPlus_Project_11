@@ -59,6 +59,18 @@ public class Hooks {
         Utilities.waitForPageToLoad(15);
     }
 
+    @Before(order = 1, value = "@UI and @Test")
+    public void setupTest() {
+
+        driver = Driver.getDriver();
+        commonPage = new CommonPage() {
+        };
+        actions = new Actions(driver);
+
+        driver.get(ConfigurationReader.getProperty("urlTest"));
+        Utilities.waitForPageToLoad(15);
+    }
+
     @After(value = "@UI")
     public void tearDown(Scenario scenario) {
 
@@ -66,7 +78,7 @@ public class Hooks {
             final byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png", "screenshots");
         }
-        Driver.closeDriver();
+//        Driver.closeDriver();
 //        LocalStorage localStorage = ((WebStorage) driver).getLocalStorage();
 //        localStorage.clear();
 //        driver.navigate().refresh();

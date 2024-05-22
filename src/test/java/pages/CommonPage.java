@@ -12,8 +12,8 @@ public abstract class CommonPage {
 
     private LoginPage loginPage;
     private HomePage homePage;
-
     private ProfilePage profilePage;
+    private ProjectsPage projectsPage;
 
     public LoginPage getLoginPage() {
         if (loginPage == null){
@@ -36,8 +36,11 @@ public abstract class CommonPage {
         return profilePage;
     }
 
-
-
-
+    public ProjectsPage getProjectsPage() {
+        if (projectsPage == null){
+            projectsPage = new ProjectsPage();
+        }
+        return projectsPage;
+    }
 
 }

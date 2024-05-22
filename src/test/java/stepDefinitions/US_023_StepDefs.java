@@ -8,7 +8,7 @@ import pages.CommonPage;
 public class US_023_StepDefs extends CommonPage {
     @Given("User clicks login with google button")
     public void userClicksLoginWithGoogleButton() {
-         getHomePage().clickGoogleLoginButton();
+        getHomePage().clickGoogleLoginButton();
     }
 
     @And("User account information should be entered")
