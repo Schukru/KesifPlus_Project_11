@@ -8,6 +8,7 @@ public enum Enum_1 {
     USER4("user4@gmail.com", "user4Passsword"),
     ;
     private String email;
+    
     private String password;
 
     Enum_1(String email, String password) {
