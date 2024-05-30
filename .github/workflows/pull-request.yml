@@ -1,0 +1,22 @@
+name: Pull Request Check
+
+on:
+  pull_request:
+
+jobs:
+  check-app:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'corretto'
+          cache: maven
+
+      - name: "Install Packages"
+        run: "mvn install -DskipTests"
+
+      - name: "Run Tests"
+        run: "mvn test"
