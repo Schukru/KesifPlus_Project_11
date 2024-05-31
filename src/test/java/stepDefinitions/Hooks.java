@@ -18,7 +18,7 @@ import utility.UI.Utilities;
 public class Hooks {
 
     public static WebDriver driver;
-    public static boolean isHeadless = false;
+    public static boolean isHeadless = true;
     public static String browserType = "chrome";
 
     public static boolean isFullScreen = true;
