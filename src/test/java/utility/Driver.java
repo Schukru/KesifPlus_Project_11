@@ -59,7 +59,7 @@ public class Driver {
 
         if (isHeadless) {
             chromeOptions.addArguments("use-fake-ui-for-media-stream");
-            chromeOptions.addArguments("--disable-gpu");
+            //chromeOptions.addArguments("--disable-gpu");
             chromeOptions.addArguments("--headless");
             chromeOptions.addArguments("--window-size=1920,1080");
             chromeOptions.addArguments("--no-sandbox");
