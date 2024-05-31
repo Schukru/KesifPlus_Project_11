@@ -19,4 +19,4 @@ jobs:
         run: "mvn install -DskipTests"
 
       - name: "Run Tests"
-        run: "mvn test"
+        run: "mvn test -Dheadless=true"
