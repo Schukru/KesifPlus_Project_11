@@ -1,4 +1,4 @@
-@UI
+@UIMobilya
 @Tuesday_1
 Feature: Verify Destek and other menu buttons are available in Daha Fazla main menu
 

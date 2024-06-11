@@ -1,4 +1,4 @@
-@UI
+@UIMobilya
 @US_16
 
 Feature: User should be registered into the system and should do various actions on Profile page
