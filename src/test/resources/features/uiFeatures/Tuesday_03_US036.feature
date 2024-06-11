@@ -1,5 +1,4 @@
-@UI
-@Test
+@UITest
 @Tuesday_3
 Feature: US 036-1 User should be able to see price changes on the cost page
 

@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import enums.Enum_1;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -10,6 +11,7 @@ import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
 import pages.CommonPage;
+import utility.API.MySelf;
 import utility.ConfigurationReader;
 import utility.DB.DatabaseUtilities;
 import utility.Driver;
@@ -47,7 +49,7 @@ public class Hooks {
         height = 844;
     }
 
-    @Before(order = 1, value = "@UI")
+    @Before(order = 1, value = "@UIMobilya")
     public void setup() {
 
         driver = Driver.getDriver();
@@ -59,7 +61,7 @@ public class Hooks {
         Utilities.waitForPageToLoad(15);
     }
 
-    @Before(order = 1, value = "@UI and @Test")
+    @Before(order = 1, value = "@UITest")
     public void setupTest() {
 
         driver = Driver.getDriver();
@@ -69,6 +71,11 @@ public class Hooks {
 
         driver.get(ConfigurationReader.getProperty("urlTest"));
         Utilities.waitForPageToLoad(15);
+    }
+
+    @Before(value = "@Api_USER2")
+    public void LoginWithUser2(){
+        MySelf mySelf = new MySelf(Enum_1.USER2.getEmail(), Enum_1.USER2.getPassword());
     }
 
     @After(value = "@UI")

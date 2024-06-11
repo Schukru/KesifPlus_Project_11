@@ -1,4 +1,4 @@
-package stepDefinitions;
+package stepDefinitions.backendStepDefs;
 
 import enums.Enum_1;
 import io.cucumber.java.en.Given;
