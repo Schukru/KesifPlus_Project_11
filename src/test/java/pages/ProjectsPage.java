@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 import static stepDefinitions.Hooks.driver;
+import static stepDefinitions.backendStepDefs.Week6_Api_StepDefs.myProjectName;
 
 public class ProjectsPage extends CommonPage {
 
@@ -46,6 +47,7 @@ public class ProjectsPage extends CommonPage {
         Utilities.sendText(projectNameInputBox, projectName);
         projectNameInputBox.sendKeys(Keys.ENTER);
         System.out.println("projectName = " + projectName);
+        myProjectName = projectName;
     }
 
     public void openProject(String project) {
