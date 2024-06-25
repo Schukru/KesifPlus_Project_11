@@ -1,9 +1,19 @@
 package utility.DB;
 
 import lombok.SneakyThrows;
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
+import software.amazon.awssdk.awscore.exception.AwsServiceException;
+import software.amazon.awssdk.core.exception.SdkClientException;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
+import software.amazon.awssdk.services.dynamodb.DynamoDbClientBuilder;
+import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
+import software.amazon.awssdk.services.dynamodb.model.DeleteItemRequest;
 import utility.ConfigurationReader;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DatabaseUtilities {
 
@@ -11,6 +21,7 @@ public class DatabaseUtilities {
     private static Statement statement;
     private static PreparedStatement preparedStatement;
     public static ResultSet resultSet;
+    public static DynamoDbClient ddb;
 
     /**
      * method database connection i olusturmak icin kullanildi
@@ -118,6 +129,41 @@ public class DatabaseUtilities {
 
     public static Connection getConnection(){
         return connection;
+    }
+
+    public static DynamoDbClient createDynamoDBConnection(String profileName){
+        ProfileCredentialsProvider credentialsProvider = ProfileCredentialsProvider.builder()
+                .profileName("default")
+                .build();
+
+        DynamoDbClientBuilder builder = DynamoDbClient.builder()
+                .credentialsProvider(credentialsProvider)
+                .region(Region.EU_CENTRAL_1);
+
+        ddb = builder.build();
+        return ddb;
+    }
+
+    public static void closeDynamoDBConnection(){
+        ddb.close();
+    }
+
+    public static void deleteProjectItem(String projectName, String tableKey, String keyValue){
+        Map<String, AttributeValue> keyToDelete = new HashMap<>();
+        keyToDelete.put(tableKey, AttributeValue.builder().s(keyValue).build());
+
+        DeleteItemRequest deleteItemRequest = DeleteItemRequest.builder()
+                .tableName("Projects_stg")
+                .key(keyToDelete)
+                .build();
+
+        try {
+            ddb.deleteItem(deleteItemRequest);
+            System.out.println("Item; " + keyValue + " was successfully deleted");
+        } catch (AwsServiceException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
 

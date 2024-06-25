@@ -20,7 +20,7 @@ import utility.UI.Utilities;
 public class Hooks {
 
     public static WebDriver driver;
-    public static boolean isHeadless = true;
+    public static boolean isHeadless = false;
     public static String browserType = "chrome";
 
     public static boolean isFullScreen = true;
@@ -98,6 +98,16 @@ public class Hooks {
                 "email : " + ConfigurationReader.getProperty("user1_email") +
                         " password : " + ConfigurationReader.getProperty("user1_password")
         );
+    }
+
+    @Before("@DB_default")
+    public void setupDatabaseDefault() {
+        DatabaseUtilities.createDynamoDBConnection("default");
+    }
+
+    @After("@DB_default")
+    public void closeDatabaseDefault() {
+        DatabaseUtilities.closeDynamoDBConnection();
     }
 
     @Before("@DB")
