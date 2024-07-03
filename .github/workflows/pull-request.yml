@@ -1,8 +1,8 @@
 name: Pull Request Check
 
 on:
-  schedule:
-    - cron: '30 8 * * *'    # Her gün sabah 11:30 (TR) çalıştır. (UTC saat dilimi)
+#  schedule:
+#    - cron: '30 8 * * *'    # Her gün sabah 11:30 (TR) çalıştır. (UTC saat dilimi)
   push:
     branches: [ "master" ]
   pull_request:
