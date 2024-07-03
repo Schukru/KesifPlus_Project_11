@@ -8,9 +8,9 @@ on:
   pull_request:
     types:
       - approved
-      branches:
+    branches:
         - master
-  workflow_dispacth:    # manuel çalıştırma butonunu aktive eder
+  workflow_dispatch:    # manuel çalıştırma butonunu aktive eder
 
 jobs:
   check-app:
