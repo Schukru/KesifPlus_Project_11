@@ -27,8 +27,30 @@ jobs:
       - name: "Install Packages"
         run: "mvn install -DskipTests"
 
-      - name: "Run Tests"
+      - name: Run Tests
         continue-on-error: true    #  hatanın görmezden gelinmesi için eklendi
         run: |
           mvn clean
           mvn test
+
+      - name: Rapor dosyalarını kaydet
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            target/cucumber-html-reports
+            target/reports/html/html_reports.html
+            target/PdfReport/ExtentPdf.pdf
+            
+      - name: Send email notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.yandex.com.tr
+          server_port: 465
+          username: ${{ secrets.YANDEX_USERNAME }}
+          password: ${{ secrets.YANDEX_PASSWORD_2 }}
+          subject: 'Github CI Build Notification'
+          body: 'Java CI build has been completely successfully'
+          from: ${{ secrets.YANDEX_USERNAME }}
+          to: ' dr.sukru.kilic@gmail.com, mustafaduyarer@gmail.com, emneulusoy@gmail.com'      
+          attachments: target/PdfReport/ExtentPdf.pdf
