@@ -27,8 +27,20 @@ jobs:
       - name: "Install Packages"
         run: "mvn install -DskipTests"
 
-      - name: "Run Tests"
+      - name: Run Tests
         continue-on-error: true    #  hatanın görmezden gelinmesi için eklendi
         run: |
           mvn clean
           mvn test
+
+      - name: Rapor dosyalarını kaydet
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            target/cucumber-html-reports
+            target/reports/html/html_reports.html
+            target/PdfReport/ExtentPdf.pdf
+
+          
+          
