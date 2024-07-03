@@ -102,7 +102,7 @@ public class HomePage extends CommonPage {
 
     public WebElement getFooterOption(String title){
         WebElement element = Driver.getDriver().findElement(By.xpath(
-                "//div[@id='SITE_FOOTER']//*[contains(text(), '" + title + "')]"));
+                "//footer[@id='SITE_FOOTER']//*[contains(text(), '" + title + "')]"));
         return element;
     }
 
