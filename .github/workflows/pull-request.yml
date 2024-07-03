@@ -48,7 +48,7 @@ jobs:
           server_address: smtp.yandex.com.tr
           server_port: 465
           username: ${{ secrets.YANDEX_USERNAME }}
-          password: ${{ secrets.YANDEX_PASSWORD }}
+          password: ${{ secrets.YANDEX_PASSWORD_2 }}
           subject: 'Github CI Build Notification'
           body: 'Java CI build has been completely successfully'
           from: ${{ secrets.YANDEX_USERNAME }}
